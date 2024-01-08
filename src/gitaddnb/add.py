@@ -9,12 +9,13 @@ def addnb(file_path: str) -> None:
     with open(file_path, encoding="utf-8") as f:
         original_content = f.read()
     j = json.loads(original_content)
-    execution_count = [
+    execution_counts = [
         cell["execution_count"] for cell in j["cells"] if cell["cell_type"] == "code" and cell.get("source", []) != []
     ]
-    assert execution_count == list(
-        range(1, 1 + len(execution_count))
-    ), f"Not Executed in Order. Restart and Run All on {file_path}"
+    propper_order = list(range(1, 1 + len(execution_counts)))
+    assert (
+        execution_counts == propper_order
+    ), f"Not executed consecutively: {execution_counts}. Restart and Run All on {file_path}"
     with open(file_path, encoding="utf-8") as f:
         j2 = json.load(f)
     for cell in j2["cells"]:
