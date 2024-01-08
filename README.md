@@ -9,7 +9,7 @@ If you want to add a Jupyter Notebook to the git stage:
 
 ## Pre-Commit
 
-You can use this repo as a [pre-commit](https://pre-commit.com/) hook:
+You can use this repository as a [pre-commit](https://pre-commit.com/) hook:
 
 ```yaml
 repos:
