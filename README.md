@@ -1,15 +1,17 @@
 # gitaddnb
 
-If you want to add a Jupyter Notebook to the git stage:
+If you want to add a Jupyter Notebook to the git stage ensuring that:
 
-- ensuring all code cells ran consecutively
-- without outputs
-- without execution order
-- leave the cell outputs on disk as is
+- all code cells have consecutive execution order
+- all code cell outputs are clean
+- all code cell execution orders are clean
+- **all cell outputs on disk remain untouched**
+
+then this package is for you.
 
 ## Pre-Commit
 
-You can use this repository as a [pre-commit](https://pre-commit.com/) hook:
+You can use this package as a [pre-commit](https://pre-commit.com/) hook:
 
 ```yaml
 repos:
@@ -25,12 +27,18 @@ On the first Commit Attempt, this hook will fail due to changing the content of 
 
 ### Installation
 
+Install this package using pipx or pip. It comes without any dependencies.
+
 ```bash
 pipx install gitaddnb
 ```
 
 ### Usage
 
+After installation, add notebooks like this:
+
 ```bash
 gitaddnb notebook1.ipynb notebook2.ipynb
 ```
+
+The notebooks will now be in the git stage, cleaned. The files in the working directory will still have your output.
