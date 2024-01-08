@@ -25,7 +25,7 @@ readme = "README.md"
 "Documentation" = "https://github.com/pcjedi/gitaddnb/blob/main/README.md"
 "Repository" = "https://github.com/pcjedi/gitaddnb"
 "Changelog" = "https://github.com/pcjedi/gitaddnb/releases"
-"Bug Tracker" = "https://github.com/freenet-group/dp-sp-postprocessor/issues"
+"Bug Tracker" = "https://github.com/pcjedi/gitaddnb/issues"
 
 [project.scripts]
 gitaddnb = "gitaddnb.add:main"
