@@ -5,13 +5,12 @@ on:
   pull_request:
 
 jobs:
-  build:
-    name: Lint
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: pip install .
+      - run: pip install -e .
       - run: python -m unittest
