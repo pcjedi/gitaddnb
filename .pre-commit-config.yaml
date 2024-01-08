@@ -1,5 +1,0 @@
-repos:
-  - repo: https://github.com/pcjedi/gitaddnb
-    rev: "77e0aa9"
-    hooks:
-      - id: gitaddnb
