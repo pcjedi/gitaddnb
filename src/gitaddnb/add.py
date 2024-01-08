@@ -33,11 +33,10 @@ def addnb(file_path: str) -> None:
         f.write(original_content)
 
 
-def gitaddnb(args: list[str] = sys.argv[1:]) -> int:
+def main(args: list[str] = sys.argv[1:]) -> int:
     """run the cli"""
     file_paths = [arg for arg in args if not arg.startswith("-") and arg.endswith(".ipynb")]
     for file_path in file_paths:
-        # check_execution_order(file_path=file_path)
         subprocess.run(["git", "--version"], check=True, capture_output=True)
         addnb(file_path=file_path)
     return 0
