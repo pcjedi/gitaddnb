@@ -16,7 +16,7 @@ def addnb(file_path: str) -> None:
         j2 = json.load(f)
     for cell in j2["cells"]:
         cell["outputs"] = []
-        cell.pop("execution_count")
+        cell["execution_count"] = None
 
     with open(file_path, mode="w", encoding="utf-8") as f:
         json.dump(obj=j2, fp=f, sort_keys=True)
