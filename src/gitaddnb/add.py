@@ -20,7 +20,7 @@ def addnb(file_path: str) -> None:
         ]
         propper_order = list(range(1, 1 + len(execution_counts)))
         assert (
-            execution_counts == propper_order or j["gitaddnb"]
+            execution_counts == propper_order
         ), f"Not executed consecutively: {execution_counts}. Restart and Run All on {file_path}"
     with open(file_path, encoding="utf-8") as f:
         j2 = json.load(f)
