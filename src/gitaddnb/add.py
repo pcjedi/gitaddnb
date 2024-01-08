@@ -14,13 +14,14 @@ def addnb(file_path: str) -> None:
     ]
     propper_order = list(range(1, 1 + len(execution_counts)))
     assert (
-        execution_counts == propper_order
+        execution_counts == propper_order or j["gitaddnb"]
     ), f"Not executed consecutively: {execution_counts}. Restart and Run All on {file_path}"
     with open(file_path, encoding="utf-8") as f:
         j2 = json.load(f)
     for cell in j2["cells"]:
         cell["outputs"] = []
         cell["execution_count"] = None
+    j2["gitaddnb"] = True
 
     with open(file_path, mode="w", encoding="utf-8") as f:
         json.dump(obj=j2, fp=f, sort_keys=True)
