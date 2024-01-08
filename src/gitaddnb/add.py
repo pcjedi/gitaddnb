@@ -7,11 +7,14 @@ import sys
 def addnb(file_path: str) -> None:
     """add a file to the git stage"""
     with open(file_path, encoding="utf-8") as f:
-        j = json.load(f)
+        original_content = f.read()
+    j = json.loads(original_content)
     execution_count = [
         cell["execution_count"] for cell in j["cells"] if cell["cell_type"] == "code" and cell.get("source", []) != []
     ]
-    assert execution_count == list(range(1, 1 + len(execution_count)))
+    assert execution_count == list(
+        range(1, 1 + len(execution_count))
+    ), f"Not Executed in Order. Restart and Run All on {file_path}"
     with open(file_path, encoding="utf-8") as f:
         j2 = json.load(f)
     for cell in j2["cells"]:
@@ -24,14 +27,13 @@ def addnb(file_path: str) -> None:
     subprocess.run(["git", "add", file_path], check=False)
 
     with open(file_path, mode="w", encoding="utf-8") as f:
-        json.dump(obj=j, fp=f, sort_keys=True)
+        f.write(original_content)
 
 
 def gitaddnb(args: list[str] = sys.argv[1:]) -> None:
     """run the cli"""
-    file_paths = [arg for arg in args if not arg.startswith("-")]
+    file_paths = [arg for arg in args if not arg.startswith("-") and arg.endswith(".ipynb")]
     for file_path in file_paths:
         # check_execution_order(file_path=file_path)
         subprocess.run(["git", "--version"], check=True, capture_output=True)
         addnb(file_path=file_path)
-    return
