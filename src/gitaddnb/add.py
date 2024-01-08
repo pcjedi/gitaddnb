@@ -27,7 +27,10 @@ def addnb(file_path: str) -> None:
     for cell in j2["cells"]:
         cell["outputs"] = []
         cell["execution_count"] = None
-        cell["metadata"]["gitaddnb"] = True
+        if all(gitaddnb_processed):
+            del cell["metadata"]["gitaddnb"]
+        else:
+            cell["metadata"]["gitaddnb"] = True
 
     with open(file_path, mode="w", encoding="utf-8") as f:
         json.dump(obj=j2, fp=f, sort_keys=True)
