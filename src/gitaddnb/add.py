@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 
-def check_execution_order(file_path: str) -> None:
+def addnb(file_path: str) -> None:
     """add a file to the git stage"""
     with open(file_path, encoding="utf-8") as f:
         j = json.load(f)
@@ -27,20 +27,11 @@ def check_execution_order(file_path: str) -> None:
         json.dump(obj=j, fp=f, sort_keys=True)
 
 
-def addnb(file_path: str) -> subprocess.CompletedProcess[bytes]:
-    """add a file to the git stage"""
-    print(file_path)
-    with open(file_path, encoding="utf-8") as f:
-        file_content = f.read()
-    print(file_content)
-    # return subprocess.run(["git", "add", file_path], check=True)
-
-
 def gitaddnb(args: list[str] = sys.argv[1:]) -> None:
     """run the cli"""
     file_paths = [arg for arg in args if not arg.startswith("-")]
     for file_path in file_paths:
-        check_execution_order(file_path=file_path)
+        # check_execution_order(file_path=file_path)
         subprocess.run(["git", "--version"], check=True, capture_output=True)
         addnb(file_path=file_path)
     return
