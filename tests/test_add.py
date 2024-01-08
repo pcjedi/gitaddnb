@@ -2,8 +2,8 @@
 import json
 import unittest
 
-import gitaddnb
-import gitaddnb.add
+import gitaddnb  # type:ignore
+import gitaddnb.add  # type:ignore
 
 
 class TestStringMethods(unittest.TestCase):
