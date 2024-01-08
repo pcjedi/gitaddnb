@@ -38,4 +38,4 @@ def gitaddnb(args: list[str] = sys.argv[1:]) -> int:
         # check_execution_order(file_path=file_path)
         subprocess.run(["git", "--version"], check=True, capture_output=True)
         addnb(file_path=file_path)
-    return 1
+    return 0
