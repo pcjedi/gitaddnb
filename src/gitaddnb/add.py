@@ -9,12 +9,7 @@ def addnb(file_path: str) -> None:
     with open(file_path, encoding="utf-8") as f:
         original_content = f.read()
     j = json.loads(original_content)
-    gitaddnb_processed = [
-        cell["metadata"].get("gitaddnb", False)
-        for cell in j["cells"]
-        if cell["cell_type"] == "code" and cell.get("source", []) != []
-    ]
-    if not all(gitaddnb_processed):
+    if not j.get("gitaddnb"):
         execution_counts = [
             cell["execution_count"] for cell in j["cells"] if cell["cell_type"] == "code" and cell.get("source", []) != []
         ]
@@ -27,10 +22,7 @@ def addnb(file_path: str) -> None:
     for cell in j2["cells"]:
         cell["outputs"] = []
         cell["execution_count"] = None
-        if all(gitaddnb_processed):
-            del cell["metadata"]["gitaddnb"]
-        else:
-            cell["metadata"]["gitaddnb"] = True
+    j2["gitaddnb"] = True
 
     with open(file_path, mode="w", encoding="utf-8") as f:
         json.dump(obj=j2, fp=f, sort_keys=True)
